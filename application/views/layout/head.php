@@ -10,12 +10,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Shop Homepage</title>
+        <title>Test Ci3</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="<?php echo base_url('assets/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
         <!-- Custom styles for this template -->
-        <link href="<?php echo base_url('assets/css/shop-homepage.css'); ?>" rel="stylesheet">
+        <link href="<?php echo base_url('assets/css/style.css');  ?>" rel="stylesheet">
     </head>
     
     <!-- begin BODY -->
