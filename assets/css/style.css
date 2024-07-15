@@ -1,0 +1,121 @@
+:root {
+    --black: #000000;
+    --transparent-black: rgba(0, 0, 0, 0.4);
+    --very-transparent-black: rgba(0, 0, 0, 0.16);
+
+    --white: #FFFFFF;
+    --transparent-white: rgba(255, 255, 255, 0.4);
+
+    --input-focus-border: darkgrey;
+}
+
+.fs-0-5em {
+    font-size: .5em;
+}
+
+.fs-3em {
+    font-size: 3em;
+}
+
+/* Redéfinition */
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    background-color: var(--black);
+    border-color: var(--black);
+}
+
+.btn-primary {
+    box-shadow: 0 0.125rem 0.25rem 0 var(--transparent-black);
+}
+
+.btn-primary:focus {
+    border-color: darkgrey;
+}
+
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:focus {
+    background-color: var(--white);
+    border-color: var(--white);
+    color: var(--black); /* Texte noir sur fond blanc */
+}
+
+.btn-success {
+    box-shadow: 0 0.125rem 0.25rem 0 var(--transparent-white);
+}
+
+.btn-success:focus {
+    border-color: darkgrey;
+    color: var(--black); /* Texte noir sur focus */
+}
+
+.bg-menu-theme .menu-inner > .menu-item.active > .menu-link {
+    color: var(--black);
+    background-color: var(--very-transparent-black) !important;
+}
+
+.bg-menu-theme .menu-inner > .menu-item.active:before {
+    background: var(--black);
+}
+
+.dropdown-item:not(.disabled).active, .dropdown-item:not(.disabled):active {
+    background-color: var(--very-transparent-black);
+    color: var(--black) !important;
+}
+
+/* Form elements */
+.input-group:focus-within .form-control, .input-group:focus-within .input-group-text {
+    border-color: var(--input-focus-border);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--input-focus-border);
+}
+
+/* Personnalisation */
+.review {
+    box-shadow: none;
+}
+
+.review hr {
+    margin: 0;
+}
+
+.review .update-btn, .review .delete-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.review .update-btn {
+    right: 4rem;
+}
+
+.stars {
+    color: var(--white);
+}
+
+.stars-radio i {
+    font-size: 1.7rem;
+    cursor: pointer;
+    color: var(--black); /* Étoiles en noir */
+}
+
+.checked-star::before {
+    content: "\ebac";
+    color: var(--black); /* Étoile cochée en noir */
+}
+
+.stars-radio input[type=radio] {
+    display: none;
+}
+
+.list-group-item {
+    position: relative;
+    background-color: var(--white); /* Fond blanc */
+    color: var(--black); /* Texte noir */
+}
+
+.list-group-item .actions {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    color: var(--black); /* Actions en noir */
+}
