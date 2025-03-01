@@ -28,10 +28,10 @@ class Marchee :
 
     def draw(self, canvas):
         """Dessine un rectangle représentant le marché et ajoute un label avec son nom au centre du rectangle."""
-        x1 = self.x
-        y1 = self.y
-        x2 = self.width + self.x
-        y2 = self.height + self.y
+        x1 = (self.x) + 20
+        y1 = (self.y) + 20
+        x2 = (self.width + self.x) * 100
+        y2 = (self.height + self.y) * 100
 
         # Dessine le rectangle
         canvas.create_rectangle(x1, y1, x2, y2, outline="black", width=1, fill="")

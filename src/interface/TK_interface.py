@@ -82,10 +82,10 @@ class TK_interface :
 
         # CREATION DE LA CARTE (AFFICHAGE)
         for marchee in carte.marchees : marchee.draw(canvas)
-        for box in carte.boxs : 
-            if box.payee : box.green_draw(canvas)
-            else : box.red_draw(canvas)
-            marchee.draw(canvas)
+        for box in carte.boxs : box.draw(canvas)
+            # if box.payee : box.green_draw(canvas)
+            # else : box.red_draw(canvas)
+            # marchee.draw(canvas)
 
     def valid_text (self, texte) : return not texte or texte.strip() == ""
 # FON FONCTION TRAITEMENTS
