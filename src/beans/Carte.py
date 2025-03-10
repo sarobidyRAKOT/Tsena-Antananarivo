@@ -12,5 +12,5 @@ class Carte :
     def get_carte (self, udb, mois, annee) :
 
         self.marchees = Marchee().get_all(udb)
-        self.boxs = Box().get_allDetail(udb, mois, annee)
+        self.boxs = Box.get_allDetail(Box, udb, mois, annee)
     
