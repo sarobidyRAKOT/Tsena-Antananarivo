@@ -1,43 +1,102 @@
 
 class Paiement_detail :
 
-    def __init__(self, id_paiement=None, montant=None, mois=None, annee=None, payees=None, reste=None, id_box=None) :
+    def __init__(self, id_paiement=None, mois=None, annee=None, payee=None, reste=None, id_box=None, id_locataire=None, id_contrat=None, date_echeance=None, debut=None) :
         self.id_paiement = id_paiement
-        self.montant = montant
         self.mois = mois
         self.annee = annee
-        self.payees = payees
+        self.payee = payee
         self.reste = reste
         self.id_box = id_box
+        self.id_locataire = id_locataire
+        self.id_contrat = id_contrat
+        self.date_echeance = date_echeance
+        self.debut = debut
 
 
-    def get_paiement_farany (self, udb, id_box) :
+    
+    def construct_tableau (self, data) :
 
-        paiement_farany = None
-        # print (f"ATO paiement farany {id_box}")
-        requete = "SELECT TOP 1 * FROM paiement_detail WHERE id_box = ? ORDER BY p.mois ASC, p.annee ASC"
-        params = (id_box)
+        liste = []
+        for id_paiement, mois, annee, payee, reste, id_contrat, id_locataire, id_box, date_echeance, debut in data :
+            pd = Paiement_detail (id_paiement, mois, annee, payee, reste, id_box, id_locataire, id_contrat, date_echeance, debut)
+            liste.append(pd)
+        return liste 
+
+    def construct (self, data) :
+        if data : # si data n'est pas vide ![]
+            id_paiement, mois, annee, payee, reste, id_contrat, id_locataire, id_box, date_echeance, debut = data[0]
+            return Paiement_detail (id_paiement, mois, annee, payee, reste, id_box, id_locataire, id_contrat, date_echeance, debut)
+        else : return None
+
+
+    # def dernier_NONreglee (self, udb, id_locataire) :
+
+    #     paiement_farany = None
+    #     # print (f"ATO paiement farany {id_locataire}")
+    #     requete = """
+    #         SELECT TOP 1 *
+    #         FROM paiement_detail p
+    #         WHERE p.id_locataire = ? 
+    #         ORDER BY p.annee ASC, p.mois ASC
+    #     """
+    #     params = (id_locataire)
+    #     data = udb.fetch_all (requete, params)        
+
+    #     if data:  # Vérifie si une ligne a été trouvée
+    #         # print (f"{data}")
+    #         id_paiement, montant_du, mois, annee, id_box, payee, reste, id_locataire, id_contrat, date_echeance = data[0]
+    #         paiement_farany = Paiement_detail(id_paiement, montant_du, mois, annee, payee, reste, id_box, id_locataire, id_contrat, date_echeance)
+
+    #     return paiement_farany
+
+
+
+    def get_allNON_payee_par (self, id_locataire, udb) :
+
+
+        requete = """
+            SELECT 
+                *
+            FROM paiement_detail 
+            WHERE id_locataire = ?
+            AND reste <> 0
+            ORDER BY annee ASC, mois ASC,
+            debut ASC
+        """
+        params = (id_locataire)
         data = udb.fetch_all (requete, params)
 
-        for id_paiement, montant, mois, annee, id_box, payees, reste in data :
-            paiement_farany = Paiement_detail(id_paiement, montant, mois, annee, payees, reste, id_box)
-        
-        return paiement_farany
+        # print(f"{data}")
+        non_payees = self.construct_tableau (data)
+                
+        return non_payees
 
-    def get_allApayee (self, udb, id_box) :
 
-        a_payee = []
 
-        requete = "SELECT * FROM paiement_detail WHERE id_box = ? ORDER BY p.mois ASC, p.annee ASC"
-        params = (id_box)
+
+    def get_allNON_payee (self, id_locataire, id_box, udb) :
+
+        requete = """
+            SELECT 
+                *
+            FROM paiement_detail 
+            WHERE id_box = ? AND id_locataire = ?
+            AND reste <> 0
+            ORDER BY annee ASC, mois ASC,
+            debut ASC
+        """
+        params = (id_box, id_locataire)
         data = udb.fetch_all (requete, params)
 
-        for id_paiement, montant, mois, annee, id_box, payees, reste in data :
-            ap = Paiement_detail(id_paiement, montant, mois, annee, payees, reste, id_box)
-            a_payee.append(ap)
+        # print(f"{data}")
+        non_payees = self.construct_tableau (data)       
         
-        return a_payee
+        return non_payees
 
+
+    def __repr__(self):
+        return f"- id_paiement: {self.id_paiement}\n- periode: {self.mois} {self.annee}\n- payee: {self.payee}\n- reste: {self.reste}\n- id_box: {self.id_box}\n- id_contrat: {self.id_contrat}\n- date echeance: {self.date_echeance}\n- id_locataire: {self.id_locataire}"
 
 
 
